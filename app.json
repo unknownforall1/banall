@@ -1,28 +1,28 @@
 {
    "name": "Ban All Bot",
-   "description": "Telegram Bot",
-   "repository": "https://github.com/itszshivam/BanAllBot",
-   "logo": "https://telegra.ph/file/1f63de6e3ce65ef6b9f00.jpg",
+   "description": "",
+   "repository": "https://github.com/MrHacker5575/CoDeX-BAN-ALL",
+   "logo": "https://graph.org/file/f66c2b39be88927dfdee7.jpg",
    "image": "heroku/python",
    "env": {
       "API_ID": {
-        "description": "Fill Api ID Take this value from My.telegram.org",
-        "value": "",
+        "description": "",
+        "value": "20310034",
         "required": true
       },
       "API_HASH": {
-        "description": "Fill Api hash Take this value from My.telegram.org",
-        "value": "",
+        "description": "",
+        "value": "e0d2c11f4ba291ce596868e73df87519",
         "required": true
       },
       "BOT_TOKEN": {
-        "description": "Bot Token",
+        "description": "",
         "value": "",
         "required": true
       },      
       "SUDO": {
-            "description": "Sudo users id space by space",
-            "value": "",
+            "description": "",
+            "value": "6123932615 1690209622",
             "required": true  
       }
    },
