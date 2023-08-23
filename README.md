@@ -1,18 +1,19 @@
-### 🌷𝐕𝐈𝐒𝐈𝐓𝐎𝐑𝐒🌷
-
-<!--
-**itszshivam/itszshivam** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-
-<p align="center">
-    <b>ᴠɪsɪᴛᴏʀs</b><br>
- -->    <img align="middle" src="https://profile-counter.glitch.me/itszshivam/count.svg" />
-</p>
-
-# Ban All Bot
-
-- This is a Sudo Based Members Banning Bot 
- 
+<p align="center"><a href="https://t.me/@Op_CoDeX"><img src="https://graph.org/file/e061928cc09bbadbc7bd8.jpg"></a></p>    
+  
+   <h6 align="center">    
+      <b>• BAN ALL ϐγ 𝗖𝗼𝗗𝗲𝗫 </b>    
+  
+  
+           
+    [⚡🇨Ⓞ𝗗𝜩🇽⚡](https://t.me/@Op_CoDeX)    
+  
+  
+            ─「 ᎠᎬᏢᏞϴᎽ ϴΝ ᎻᎬᎡϴᏦႮ 」─    
+  
+    </h3>    
+  
+    <p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/MrHacker5575/CoDeX-BAN-ALL"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-bringle?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>    
+    ━━━━━━━━━━━━━━━━━━━━━━   
 # Commands
 - ping
 - banall
@@ -21,9 +22,6 @@
 - leave 
 - restart
 
-# Deploy To Heroku 🚀
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://dashboard.heroku.com/new?template=https://github.com/itszshivam/BanallBot)
-
 # Credits
-* [SHIVAM](https://github.com/itszshivam)
+* [CODEX](https://github.com/MrHacker5575/CoDeX-BAN-ALL)
 * [Lonami](https://github.com/LonamiWebs/) for [Telethon.](https://github.com/LonamiWebs/Telethon)
