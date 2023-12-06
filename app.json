@@ -22,7 +22,7 @@
       },      
       "SUDO": {
             "description": "",
-            "value": "6617592823,",
+            "value": "6617592823",
             "required": true  
       }
    },
