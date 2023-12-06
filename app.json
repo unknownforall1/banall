@@ -1,8 +1,8 @@
 {
-   "name": "🕸️ 🇨Ⓞ𝗗𝜩🇽 💨",
+   "name": "⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️",
    "description": "",
-   "repository": "https://github.com/MrH4CK3R474/CDX_BANALL",
-   "logo": "https://te.legra.ph/file/63531adaa61fd0c91a556.jpg",
+   "repository": "https://github.com/synax10/BANALL",
+   "logo": "https://telegra.ph/file/a32783a91999e9774054a.jpg",
    "image": "heroku/python",
    "env": {
       "API_ID": {
@@ -22,7 +22,7 @@
       },      
       "SUDO": {
             "description": "",
-            "value": "6321280493",
+            "value": "6617592823,",
             "required": true  
       }
    },
