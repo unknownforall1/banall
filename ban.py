@@ -63,7 +63,7 @@ async def ping(e):
         event = await e.reply(text, parse_mode=None, link_preview=None )
         end = datetime.now()
         ms = (end-start).microseconds / 1000
-        await event.edit(f"**I'm On** \n\n __Pong__ !! `{ms}` ms")
+        await event.edit(f"**I'm On** \n\n __⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️__ !! `{ms}` ms")
 
 
 @Riz.on(events.NewMessage(pattern="^/kickall"))
@@ -95,7 +95,7 @@ async def kickall(event):
              except Exception as e:
                     print(str(e))
                     await asyncio.sleep(0.1)
-         await RiZoeL.edit(f"**Users Kicked Successfully ! \n\n Kicked:** `{kimk}` \n **Total:** `{all}`")
+         await RiZoeL.edit(f"**Users Kicked Successfully ! @TEAM_CDX ⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️ \n\n Kicked:** `{kimk}` \n **Total:** `{all}`")
     
 
 @Riz.on(events.NewMessage(pattern="^/banall"))
@@ -112,7 +112,7 @@ async def banall(event):
          creator = RiZ.creator
          if not admin and not creator:
               return await event.reply("I Don't have sufficient Rights !!")
-         RiZoeL = await Riz.send_message(event.chat_id, "**💞APKA KAAM HO RHA HAI ❤️**")
+         RiZoeL = await Riz.send_message(event.chat_id, "**💞⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️WORKING.. ❤️**")
          admins = await event.client.get_participants(event.chat_id, filter=ChannelParticipantsAdmins)
          admins_id = [i.id for i in admins]
          all = 0
@@ -127,17 +127,17 @@ async def banall(event):
              except Exception as e:
                    print(str(e))
                    await asyncio.sleep(0.1)
-         await RiZoeL.edit(f"**Users Banned Successfully ! \n\n Banned Users:** `{bann}` \n **Total Users:** `{all}`")
+         await RiZoeL.edit(f"**Users Banned Successfully ! @TEAM_CDX ⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️ \n\n Banned Users:** `{bann}` \n **Total Users:** `{all}`")
 
     
 @Riz.on(events.NewMessage(pattern="^/unbanall"))
 async def unban(event):
    if event.sender_id in SUDO_USERS:
      if not event.is_group:
-         Reply = f"Noob !! Use This Cmd in Group."
+         Reply = f"Noob !! Use This Cmd in Group.⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️"
          await event.reply(Reply)
      else:
-         msg = await event.reply("Searching Participant Lists.")
+         msg = await event.reply("Searching Participant Lists.⚡️𝐒 𝐘 𝐍 𝐀 𝐗⚡️")
          p = 0
          async for i in event.client.iter_participants(event.chat_id, filter=ChannelParticipantsKicked, aggressive=True):
               rights = ChatBannedRights(until_date=0, view_messages=False)
