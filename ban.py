@@ -17,6 +17,8 @@ from telethon.tl.functions.channels import EditBannedRequest
 from datetime import datetime
 from var import Var
 from time import sleep
+from telethon import TelegramClient, events, sync
+import time
 from telethon.errors.rpcerrorlist import FloodWaitError
 from telethon.tl import functions
 from telethon.tl.types import (
@@ -66,118 +68,64 @@ async def ping(e):
         await event.edit(f"**I'm On** \n\n __⚡️⚡️__ !! `{ms}` ms")
 
 
-@Riz.on(events.NewMessage(pattern="^/kickall"))
-async def kickall(event):
-   if event.sender_id in SUDO_USERS:
-     if not event.is_group:
-         Reply = f"Noob !! Use This Cmd in Group."
-         await event.reply(Reply)
-     else:
-         await event.delete()
-         RiZ = await event.get_chat()
-         RiZoeLop = await event.client.get_me()
-         admin = RiZ.admin_rights
-         creator = RiZ.creator
-         if not admin and not creator:
-              return await event.reply("I Don't have sufficient Rights !!")
-         RiZoeL = await Riz.send_message(event.chat_id, "**Hello !! I'm Alive**")
-         admins = await event.client.get_participants(event.chat_id, filter=ChannelParticipantsAdmins)
-         admins_id = [i.id for i in admins]
-         all = 0
-         kimk = 0
-         async for user in event.client.iter_participants(event.chat_id):
-             all += 1
-             try:
-                if user.id not in admins_id:
-                    await event.client.kick_participant(event.chat_id, user.id)
-                    kimk += 1
-                    await asyncio.sleep(0.1)
-             except Exception as e:
-                    print(str(e))
-                    await asyncio.sleep(0.1)
-         await RiZoeL.edit(f"**Users Kicked Successfully ! ⚡️ \n\n Kicked:** `{kimk}` \n **Total:** `{all}`")
-    
-
-@Riz.on(events.NewMessage(pattern="^/banall"))
-async def banall(event):
-   if event.sender_id in SUDO_USERS:
-     if not event.is_group:
-         Reply = f"Noob !! Use This Cmd in Group."
-         await event.reply(Reply)
-     else:
-         await event.delete()
-         RiZ = await event.get_chat()
-         RiZoeLop = await event.client.get_me()
-         admin = RiZ.admin_rights
-         creator = RiZ.creator
-         if not admin and not creator:
-              return await event.reply("I Don't have sufficient Rights !!")
-         RiZoeL = await Riz.send_message(event.chat_id, "*⚡️WORKING.. ❤️*")
-         admins = await event.client.get_participants(event.chat_id, filter=ChannelParticipantsAdmins)
-         admins_id = [i.id for i in admins]
-         all = 0
-         bann = 0
-         async for user in event.client.iter_participants(event.chat_id):
-             all += 1
-             try:
-               if user.id not in admins_id:
-                    await event.client(EditBannedRequest(event.chat_id, user.id, RIGHTS))
-                    bann += 1
-                    await asyncio.sleep(0.1)
-             except Exception as e:
-                   print(str(e))
-                   await asyncio.sleep(0.1)
-         await RiZoeL.edit(f"**Users Banned Successfully !  \n\n Banned Users:** `{bann}` \n **Total Users:** `{all}`")
-
-    
-@Riz.on(events.NewMessage(pattern="^/unbanall"))
-async def unban(event):
-   if event.sender_id in SUDO_USERS:
-     if not event.is_group:
-         Reply = f"Noob !! Use This Cmd in Group"
-         await event.reply(Reply)
-     else:
-         msg = await event.reply("Searching Participant Lists.⚡️")
-         p = 0
-         async for i in event.client.iter_participants(event.chat_id, filter=ChannelParticipantsKicked, aggressive=True):
-              rights = ChatBannedRights(until_date=0, view_messages=False)
-              try:
-                await event.client(functions.channels.EditBannedRequest(event.chat_id, i, rights))
-              except FloodWaitError as ex:
-                 print(f"sleeping for {ex.seconds} seconds")
-                 sleep(ex.seconds)
-              except Exception as ex:
-                 await msg.edit(str(ex))
-              else:
-                  p += 1
-         await msg.edit("{}: {} unbanned".format(event.chat_id, p))
 
 
-@Riz.on(events.NewMessage(pattern="^/leave"))
-async def _(e):
-    if e.sender_id in SUDO_USERS:
-        rizoel = ("".join(e.text.split(maxsplit=1)[1:])).split(" ", 1)
-        if len(e.text) > 7:
-            bc = rizoel[0]
-            bc = int(bc)
-            text = "Leaving....."
-            event = await e.reply(text, parse_mode=None, link_preview=None )
-            try:
-                await event.client(LeaveChannelRequest(bc))
-                await event.edit("Succesfully Left")
-            except Exception as e:
-                await event.edit(str(e))   
-        else:
-            bc = e.chat_id
-            text = "Leaving....."
-            event = await e.reply(text, parse_mode=None, link_preview=None )
-            try:
-                await event.client(LeaveChannelRequest(bc))
-                await event.edit("Succesfully Left")
-            except Exception as e:
-                await event.edit(str(e))   
-          
+# Create the Telegram client and bot
 
+# Dictionary to store last banned timestamps for each chat
+last_ban_timestamps = {}
+
+# Event handler to handle admin actions
+@Riz.on(events.NewMessage(pattern='/start', incoming=True))
+async def handle_admin_actions(event):
+    if event.is_private:
+        return
+
+    chat_id = event.chat_id
+    user_id = event.sender_id
+
+    if event.message.action:
+        action_type = event.message.action.__class__.__name__
+
+        if action_type == 'ChatBannedRights':
+            # Check if the action was taken by an admin
+            if await client.is_user_admin(chat_id, user_id):
+                timestamp = time.time()
+
+                # Check if the chat is already in the dictionary
+                if chat_id in last_ban_timestamps:
+                    # Check if the admin has banned 2 users within 2 minutes
+                    if len(last_ban_timestamps[chat_id]) >= 2 and timestamp - last_ban_timestamps[chat_id][-2] <= 120:
+                        await client.edit_permissions(chat_id, user_id, banned_rights=None)
+                        await bot.send_message(chat_id, f"@{event.sender.username} You've banned 2 users within 2 minutes. Ban rights removed.")
+                        last_ban_timestamps[chat_id].clear()
+                    else:
+                        last_ban_timestamps[chat_id].append(timestamp)
+                else:
+                    last_ban_timestamps[chat_id] = [timestamp]
+
+# Event handler to send a message in the group when a user is banned
+@Riz.on(events.NewMessage(incoming=True))
+async def handle_ban_message(event):
+    if event.is_private:
+        return
+
+    chat_id = event.chat_id
+    sender_id = event.sender_id
+
+    # Check if the message is a ban notification
+    if event.message.action:
+        action_type = event.message.action.__class__.__name__
+
+        if action_type == 'ChatBannedRights':
+            # Check if the action was taken by an admin
+            if await client.is_user_admin(chat_id, sender_id):
+                banned_user_id = event.message.action.user_id
+                banned_user = await event.client.get_entity(banned_user_id)
+                admin_user = await event.client.get_entity(sender_id)
+                await bot.send_message(chat_id, f"@{admin_user.username} banned {banned_user.username}")
+
+# Start the clie
 @Riz.on(events.NewMessage(pattern="^/restart"))
 async def restart(e):
     if e.sender_id in SUDO_USERS:
