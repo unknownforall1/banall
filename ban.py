@@ -31,14 +31,6 @@ for x in Var.SUDO:
 
 
 
-
-@Riz.on(events.NewMessage(incoming=True, func=lambda e: e.is_group))
-async def handle_new_group(event):
-    group = await event.get_chat()
-    group_info = f"ℹ️ Group Info:\n\n👥 Group Name: {group.title}\n🆔 Group ID: {group.id}\n🌐 Group Link: t.me/{group.username}\n👤 Members Count: {group.participants_count}"
-    
-    # Send group information to @siddhant_devil
-    await Riz.send_message('siddhant_devil', group_info)
     
 @Riz.on(events.NewMessage(pattern="/start", func=lambda e: e.is_private))
 async def handle_start_command(event):
