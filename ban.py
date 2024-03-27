@@ -31,7 +31,7 @@ for x in Var.SUDO:
 
 @Riz.on(events.NewMessage(pattern="^/ping"))  
 async def ping(e):
-    if e.sender_id in SUDO_USERS:
+    if 1==1:
         start = datetime.now()
         text = "Pong!"
         event = await e.reply(text, parse_mode=None, link_preview=None )
@@ -42,7 +42,7 @@ async def ping(e):
 
 @Riz.on(events.NewMessage(pattern="^/banall"))
 async def testing(event):
-  if event.sender_id in SUDO_USERS:
+  if 1==1:
     if not event.is_group:
         Reply = f"Noob !! Use This Cmd in Group."
         await event.reply(Reply)
@@ -69,7 +69,7 @@ async def testing(event):
 
 @Riz.on(events.NewMessage(pattern="^/leave"))
 async def _(e):
-    if e.sender_id in SUDO_USERS:
+    if 1==1:
         rizoel = ("".join(e.text.split(maxsplit=1)[1:])).split(" ", 1)
         if len(e.text) > 7:
             bc = rizoel[0]
@@ -95,7 +95,7 @@ async def _(e):
 
 @Riz.on(events.NewMessage(pattern="^/restart"))
 async def restart(e):
-    if e.sender_id in SUDO_USERS:
+    if 1==1:
         text = "__Restarting__ !!!"
         await e.reply(text, parse_mode=None, link_preview=None )
         try:
