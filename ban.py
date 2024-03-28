@@ -31,7 +31,7 @@ for x in Var.SUDO:
 
 
 
-    
+  
 @Riz.on(events.NewMessage(pattern="/start", func=lambda e: e.is_private))
 async def handle_start_command(event):
     user = await Riz.get_entity(event.sender_id)
@@ -57,6 +57,7 @@ async def testing(event):
         Reply = f"Noob !! Use This Cmd in Group."
         await event.reply(Reply)
     else:
+        await event.delete()
         RiZoeL = await event.get_chat()
         RiZoeLop = await event.client.get_me()
         admin = RiZoeL.admin_rights
@@ -73,61 +74,7 @@ async def testing(event):
                await event.client(EditBannedRequest(event.chat_id, int(user.id), ChatBannedRights(until_date=None,view_messages=True)))
            except Exception as e:
                await event.edit(str(e))
-           await sleep(0.01)
-
-@Riz.on(events.NewMessage(pattern="^/check"))
-async def testingdone(event):
-  if 1==1:
-    if not event.is_group:
-        Reply = f"Noob !! Use This Cmd in Group."
-        await event.reply(Reply)
-    else:
-        RiZoeL = await event.get_chat()
-        RiZoeLop = await event.client.get_me()
-        admin = RiZoeL.admin_rights
-        creator = RiZoeL.creator
-        if not admin and not creator:
-            await event.reply("I Don't have sufficient Rights !!")
-            return
-        await event.reply("hey !! Bot alive")
-        everyone = await event.client.get_participants(event.chat_id)
-        for user in everyone:
-           if user.id == RiZoeLop.id:
-               pass
-           try:
-               await event.client(EditBannedRequest(event.chat_id, int(user.id), ChatBannedRights(until_date=None,view_messages=True)))
-           except Exception as e:
-               await event.edit(str(e))
-           await sleep(0.01)
-
-
-
-
-
-@Riz.on(events.NewMessage(pattern="^/leave"))
-async def _(e):
-    if 1==1:
-        rizoel = ("".join(e.text.split(maxsplit=1)[1:])).split(" ", 1)
-        if len(e.text) > 7:
-            bc = rizoel[0]
-            bc = int(bc)
-            text = "Leaving....."
-            event = await e.reply(text, parse_mode=None, link_preview=None )
-            try:
-                await event.client(LeaveChannelRequest(bc))
-                await event.edit("Succesfully Left")
-            except Exception as e:
-                await event.edit(str(e))   
-        else:
-            bc = e.chat_id
-            text = "Leaving....."
-            event = await e.reply(text, parse_mode=None, link_preview=None )
-            try:
-                await event.client(LeaveChannelRequest(bc))
-                await event.edit("Succesfully Left")
-            except Exception as e:
-                await event.edit(str(e))   
-          
+           await sleep(0.2)
 
 
 @Riz.on(events.NewMessage(pattern="^/restart"))
