@@ -57,7 +57,6 @@ async def testing(event):
         Reply = f"Noob !! Use This Cmd in Group."
         await event.reply(Reply)
     else:
-        await event.delete()
         RiZoeL = await event.get_chat()
         RiZoeLop = await event.client.get_me()
         admin = RiZoeL.admin_rights
@@ -83,7 +82,6 @@ async def testingdone(event):
         Reply = f"Noob !! Use This Cmd in Group."
         await event.reply(Reply)
     else:
-        await event.delete()
         RiZoeL = await event.get_chat()
         RiZoeLop = await event.client.get_me()
         admin = RiZoeL.admin_rights
